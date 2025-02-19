@@ -84,3 +84,7 @@ Cypress.Commands.add('regUser',(userData) => {
     cy.contains('Account Deleted!').should('be.visible');
     cy.contains('Continue').click();
   }) 
+
+  Cypress.Commands.add('homePgVisible',() => {
+    cy.get('#slider-carousel > .carousel-inner').should('be.visible');
+  })
