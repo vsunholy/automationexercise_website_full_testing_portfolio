@@ -1,0 +1,28 @@
+{
+    "name": "bebras12356",
+    "email": "bebras12356@gmail.com",
+    "password": "12345",
+
+    "days": "13",
+    "months": "12",
+    "years": "1999",
+    
+    "firstName": "Bobr",
+    "lastName": "Beaver",
+
+    "company": "Hyper Lake 3000",
+    "address": "Beaver House 23",
+
+    "country": "United States",
+    "state": "Nameko planeta",
+    "city": "New Beaver",
+    "zipcode": "12232",
+
+    "mobile": "232312312",
+
+    "nameOnCard": "beaverihno",
+    "ccNumber": "5525 5535 5545 4222",
+    "CVC": "123",
+    "expirationMonth": "01",
+    "expirationYear": "30"
+}
