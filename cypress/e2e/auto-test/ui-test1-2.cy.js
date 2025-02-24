@@ -65,7 +65,7 @@ describe('Automation Exercise - Register, Delete, and Re-Register for Login', ()
 
         });
 
-        it.only('Logout User', () => {
+        it('Logout User', () => {
             cy.contains('Signup / Login').click()
             cy.contains('Login to your account').should('be.visible');
             cy.get('input[data-qa="login-email"]').type(userData.email);
