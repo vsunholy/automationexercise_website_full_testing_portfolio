@@ -145,3 +145,66 @@ describe('API Test Case 4', () => {
         });
     });
 });
+
+describe('API TEST CASE 5 searchProduct Endpoint', () => {
+    it.only('validates POST request behavior', () => {
+        
+        const searchTerm = 'top';
+
+        
+        cy.request({
+            method: 'POST',
+            url: 'https://automationexercise.com/api/searchProduct',
+            body: {
+                search_product: searchTerm
+            },
+            form: true,
+            failOnStatusCode: false 
+        }).then((response) => {
+       
+           
+
+          
+            let respData;
+            try {
+                respData = typeof response.body === 'string'
+                    ? JSON.parse(response.body)
+                    : response.body;
+            } catch (error) {
+                throw new Error('Failed to parse JSON response: ' + error.message);
+            }
+
+          
+
+            expect(respData).to.have.property('products').and.to.be.an('array').that.is.not.empty;
+            respData.products.forEach((product) => {
+                expect(product).to.have.property('id');
+                expect(product).to.have.property('name');
+                expect(product).to.have.property('price');
+                expect(product).to.have.property('brand');
+                expect(product).to.have.property('category');
+                expect(product.category).to.have.property('usertype');
+                expect(product.category.usertype).to.have.property('usertype');
+                expect(product.category).to.have.property('category');
+            });
+
+       
+            respData.products.forEach((product) => {
+                expect(product.id).to.be.a('number');
+                expect(product.name).to.be.a('string');
+                expect(product.price).to.be.a('string');
+                expect(product.brand).to.be.a('string');
+                expect(product.category).to.be.an('object');
+                expect(product.category.usertype).to.be.an('object');
+                expect(product.category.usertype.usertype).to.be.a('string');
+                expect(product.category.category).to.be.a('string');
+            });
+
+        
+            expect(response.status).to.equal(200);
+            expect(respData).to.have.property('responseCode').and.equal(200);
+
+            expect(response.duration).to.be.below(1000);
+        });
+    });
+});
