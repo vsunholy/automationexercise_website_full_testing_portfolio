@@ -45,7 +45,7 @@ describe('Api Test Case 1', () => {
 });
 
 describe('Api Test Case 2', () => {
-    it.only('validates POST request behavior', () => {
+    it('validates Product POST request behavior', () => {
         cy.request({
             method: 'POST',
             url: `${baseUrl}/productsList`,
@@ -77,7 +77,7 @@ describe('Api Test Case 2', () => {
 });
 
 describe('API Test Case 3', () => {
-    it('validates GET request behavior', () => {
+    it('validates GET AllBrands request behavior', () => {
         cy.request({
             method: 'GET',
             url: `${baseUrl}/brandsList`,
@@ -113,6 +113,35 @@ describe('API Test Case 3', () => {
 
 
             expect(response.duration).to.be.below(1000);
+        });
+    });
+});
+describe('API Test Case 4', () => {
+    it('validates  Brands Put request behavior', () => {
+        cy.request({
+            method: 'PUT',
+            url: `${baseUrl}/brandsList`,
+            failOnStatusCode: false
+        }).then((response) => {
+
+
+            let respData;
+            try {
+                respData = typeof response.body === 'string'
+                    ? JSON.parse(response.body)
+                    : response.body;
+            } catch (error) {
+                throw new Error('Failed to parse JSON response: ' + error.message);
+            }
+
+
+
+            expect(response.status).to.equal(200);
+
+
+            expect(respData.responseCode).to.be.a('number').and.equal(405);
+
+            expect(respData.message).to.be.a('string').and.equal('This request method is not supported.');
         });
     });
 });
