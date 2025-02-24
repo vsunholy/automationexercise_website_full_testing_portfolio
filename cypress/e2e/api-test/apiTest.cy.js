@@ -154,7 +154,7 @@ describe('API TEST CASE 5 searchProduct Endpoint', () => {
         
         cy.request({
             method: 'POST',
-            url: 'https://automationexercise.com/api/searchProduct',
+            url: `${baseUrl}/searchProduct`,
             body: {
                 search_product: searchTerm
             },
