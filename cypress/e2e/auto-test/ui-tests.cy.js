@@ -13,7 +13,7 @@ describe('Automation Exercise - Register, Delete, and Re-Register for Login', ()
 
     it('Test Case 1: Register and Delete Account', () => {
         cy.homePgVisible();
-
+        cy.deleteUser(userData);
         cy.regUser(userData);
         cy.deleteUser(userData);
     });
