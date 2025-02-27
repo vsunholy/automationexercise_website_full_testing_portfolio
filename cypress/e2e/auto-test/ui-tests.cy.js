@@ -259,7 +259,7 @@ describe('Automation Exercise - Register, Delete, and Re-Register for Login', ()
 
         });
 
-        it.only(' Verify Product quantity in Cart', () => {
+        it(' Verify Product quantity in Cart', () => {
 
             cy.get('a[href="/product_details/1"]').click();
             cy.get('.product-information').should('be.visible');
