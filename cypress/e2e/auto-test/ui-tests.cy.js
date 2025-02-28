@@ -276,13 +276,13 @@ describe('Automation Exercise - UI Tests', () => {
             cy.homePgVisible();
 
         });
-        it.only('Place Order: Register while Checkout', () => {
+        it('Place Order: Register while Checkout', () => {
             cy.get('.features_items .col-sm-4')
-            .first()
-            .trigger('mouseover')
-            .find('a')
-            .contains('Add to cart')
-            .click();
+                .first()
+                .trigger('mouseover')
+                .find('a')
+                .contains('Add to cart')
+                .click();
             cy.contains('View Cart').click();
             cy.url().should('eq', 'https://automationexercise.com/view_cart');
             cy.contains('Proceed To Checkout').click();
@@ -302,15 +302,199 @@ describe('Automation Exercise - UI Tests', () => {
             cy.get('input[name="expiry_year"]').type('2023');
             cy.contains('Pay and Confirm Order').click();
             cy.contains('Order Placed!').should('exist')
-            .and('be.visible');
+                .and('be.visible');
             cy.contains('Delete Account').click();
             cy.contains('Account Deleted!').should('be.visible');
             cy.contains('Continue').click();
-           
+
+        });
+    });
+
+    context('Test Case 15', () => {
+
+        it('Verify that home page is visible successfully', () => {
+            cy.homePgVisible();
+
+        });
+
+        it('Place Order: Register before Checkout', () => {
+
+            cy.regUser(userData);
+            cy.visit('http://automationexercise.com');
+            cy.get('.features_items .col-sm-4')
+                .first()
+                .trigger('mouseover')
+                .find('a')
+                .contains('Add to cart')
+                .click();
+            cy.contains('Continue Shopping').click();
+            cy.contains('Cart').click();
+            cy.url().should('include', '/view_cart');
+            cy.get('.cart_info').should('be.visible');
+            cy.contains('Proceed To Checkout').click();
+            cy.contains('Address Details').should('be.visible');
+            cy.contains('Review Your Order').should('be.visible');
+            cy.get('textarea[name="message"]').type('Please deliver between 9 AM and 5 PM');
+            cy.contains('Place Order').click();
+            cy.get('input[name="name_on_card"]').type('Test User');
+            cy.get('input[name="card_number"]').type('4111111111111111');
+            cy.get('input[name="cvc"]').type('123');
+            cy.get('input[name="expiry_month"]').type('12');
+            cy.get('input[name="expiry_year"]').type('2025');
+            cy.contains('Pay and Confirm Order').click();
+            cy.contains('Delete Account').click();
+            cy.contains('Account Deleted!').should('be.visible');
+            cy.contains('Continue').click();
         });
 
 
+    });
+    context('Test Case 16', () => {
+
+        before(() => {
+            cy.visit('http://automationexercise.com');
+            cy.regUser(userData);
+            cy.contains('Logout').click();
+        });
+
+        it('Verify that home page is visible successfully', () => {
+            cy.homePgVisible();
+
+        });
+
+        it('Place Order: Login before Checkout', () => {
+            cy.visit('http://automationexercise.com');
+            cy.login(userData);
+            cy.get('.features_items .col-sm-4')
+                .first()
+                .trigger('mouseover')
+                .find('a')
+                .contains('Add to cart')
+                .click();
+            cy.contains('Continue Shopping').click();
+            cy.contains('Cart').click();
+            cy.url().should('include', '/view_cart');
+            cy.get('.cart_info').should('be.visible');
+            cy.contains('Proceed To Checkout').click();
+            cy.contains('Address Details').should('be.visible');
+            cy.contains('Review Your Order').should('be.visible');
+            cy.get('textarea[name="message"]').type('Please deliver between 9 AM and 5 PM');
+            cy.contains('Place Order').click();
+            cy.get('input[name="name_on_card"]').type('Test User');
+            cy.get('input[name="card_number"]').type('4111111111111111');
+            cy.get('input[name="cvc"]').type('123');
+            cy.get('input[name="expiry_month"]').type('12');
+            cy.get('input[name="expiry_year"]').type('2025');
+            cy.contains('Pay and Confirm Order').click();
+            cy.contains('Delete Account').click();
+            cy.contains('Account Deleted!').should('be.visible');
+            cy.contains('Continue').click();
+
+        });
+    });
+    context('Test Case 17', () => {
+
+        it('Verify that home page is visible successfully', () => {
+            cy.homePgVisible();
+
+        });
+
+        it('Remove Products From Cart', () => {
+
+            cy.get('.features_items .col-sm-4')
+                .first()
+                .trigger('mouseover')
+                .find('a')
+                .contains('Add to cart')
+                .click();
+            cy.contains('Continue Shopping').click();
+            cy.contains('Cart').click();
+            cy.url().should('include', '/view_cart');
+            cy.get('.cart_info').should('be.visible');
+            cy.get('.cart_quantity_delete').first().click();
+            cy.contains('Cart is empty!').should('be.visible');
+
+        });
+    });
+
+    context('Test Case 18', () => {
+        it('Verify that home page is visible successfully', () => {
+            cy.homePgVisible();
+
+        });
+
+        it('View Category Products', () => {
+            cy.get('.left-sidebar').should('be.visible');
+            cy.contains('.left-sidebar h2', 'Category').should('be.visible');
+            cy.contains('.left-sidebar a', 'Women').should('be.visible').click();
+            cy.contains('.left-sidebar a', 'Dress').should('be.visible').click();
+            cy.contains('Women - Dress Products').should('be.visible');
+            cy.contains('.left-sidebar a', 'Men').should('be.visible').click();
+            cy.contains('.left-sidebar a', 'Tshirts').should('be.visible').click();
+            cy.url().should('include', '/category_products/3');
+            cy.contains('Men - Tshirts Products').should('be.visible');
+        });
+    })
+    context('Test Case 19', () => {
+
+        it('Verify that home page is visible successfully', () => {
+            cy.homePgVisible();
+
+        });
+
+        it('View & Cart Brand Products', () => {
+
+            cy.contains('Products').click();
+            cy.get('.brands_products').should('be.visible');
+            cy.contains('.brands_products h2', 'Brands').should('be.visible');
+            cy.get('.brands-name ul li a').first().click();
+            cy.url().should('include', 'brand');
+            cy.get('.features_items').should('be.visible');
+            cy.get('a[href="/brand_products/Polo').click();
+            cy.url().should('include', 'brand');
+            cy.get('.features_items').should('be.visible');
+        });
+    })
+    context('Test Case 20', () => {
+        const searchTerm = 'tshirt';
+        before(() => {
+            cy.visit('http://automationexercise.com');
+            cy.regUser(userData);
+            cy.contains('Logout').click();
+        });
+
+        it('Verify that home page is visible successfully', () => {
+            cy.homePgVisible();
+
+        });
+
+
+        it.only('Search Products and Verify Cart After Login', () => {
+            cy.visit('http://automationexercise.com');
+            cy.get('a[href="/products"]').click();
+            cy.url().should('include', '/products');
+            cy.get('.title').should('contain', 'All Products');
+            cy.get('#search_product').type(searchTerm);
+            cy.get('#submit_search').click();
+            cy.contains('Searched Products').should('be.visible');
+            cy.get('.features_items').should('be.visible');
+            cy.get('.features_items .col-sm-4').each(($product) => {
+                cy.wrap($product).scrollIntoView();
+                cy.wrap($product).trigger('mouseover');
+                cy.wrap($product)
+                  .contains('a', 'Add to cart')
+                  .should('be.visible', { timeout: 10000 })
+                  .click();
+                cy.contains('button', 'Continue Shopping', { timeout: 10000 }).click();
+              });
+              cy.contains('Cart').click();
+              cy.url().should('include', '/view_cart');
+              cy.get('table.table tbody tr').should('have.length', 6);
+              cy.login(userData);
+              cy.contains('Cart').click();
+              cy.get('table.table tbody tr').should('have.length', 6).and('be.visible');
+              cy.fastDelete();
+        });
 
     })
-
 });

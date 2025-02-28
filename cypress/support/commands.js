@@ -42,17 +42,16 @@
 //     cy.get('div h2.title').should('be.visible').and('not.empty');
 // })
 
-Cypress.Commands.add('regUser',(userData) => {
-    // cy.session('reg', () => {
+Cypress.Commands.add('regUser', (userData) => {
+  // cy.session('creatUser', () => {
+    cy.visit('https://automationexercise.com/');
     cy.contains('Signup / Login').click();
-  
-      
+
     cy.get('input[data-qa="signup-name"]').type(userData.name);
     cy.get('input[data-qa="signup-email"]').type(userData.email);
     cy.get('button[data-qa="signup-button"]').click();
     cy.contains('Enter Account Information').should('be.visible');
 
-    
     cy.get('#id_gender1').check();
     cy.get('input[data-qa="password"]').type(userData.password);
     cy.get('select[data-qa="days"]').select('1');
@@ -70,15 +69,17 @@ Cypress.Commands.add('regUser',(userData) => {
     cy.get('#city').type('dasdasdasd');
     cy.get('#zipcode').type('1231231');
     cy.get('#mobile_number').type('12123123');
-   
+
     cy.get('button[data-qa="create-account"]').click();
 
     cy.contains('Account Created!').should('be.visible');
     cy.contains('Continue').click();
 
-    // Verify logged in and then delete the account
-    // });  
-})
+    // Optionally, you can verify that the user is logged in, for example:
+    cy.contains(`Logged in as ${userData.name}`).should('be.visible');
+  // });
+});
+
   Cypress.Commands.add('deleteUser', (userData) => {
     cy.contains(`Logged in as ${userData.name}`).should('be.visible');
     cy.contains('Delete Account').click();
@@ -86,6 +87,26 @@ Cypress.Commands.add('regUser',(userData) => {
     cy.contains('Continue').click();
   }) 
 
+  Cypress.Commands.add('fastDelete', () => {
+    cy.contains('Delete Account').click();
+    cy.contains('Account Deleted!').should('be.visible');
+    cy.contains('Continue').click();
+  })
+
+
   Cypress.Commands.add('homePgVisible',() => {
     cy.get('#slider-carousel > .carousel-inner').should('be.visible');
   })
+
+  Cypress.Commands.add('login', (userData) => {
+    cy.visit('http://automationexercise.com');
+    cy.contains('Signup / Login').click();
+
+    cy.contains('Login to your account').should('be.visible');
+    cy.get('input[data-qa="login-email"]').type(userData.email);
+    cy.get('input[data-qa="login-password"]').type(userData.password);
+    cy.get('button[data-qa="login-button"]').click();
+
+    cy.contains(`Logged in as ${userData.name}`).should('be.visible');
+  }
+  );
