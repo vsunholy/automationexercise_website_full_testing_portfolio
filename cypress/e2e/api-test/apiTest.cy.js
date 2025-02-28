@@ -147,7 +147,7 @@ describe('API Test Case 4', () => {
 });
 
 describe('API TEST CASE 5 searchProduct Endpoint', () => {
-    it.only('validates POST request behavior', () => {
+    it('validates POST request behavior', () => {
         
         const searchTerm = 'top';
 
