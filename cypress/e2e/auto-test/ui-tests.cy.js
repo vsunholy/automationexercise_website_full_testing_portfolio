@@ -270,5 +270,47 @@ describe('Automation Exercise - UI Tests', () => {
         })
 
     })
+    context('Test Case 14', () => {
+
+        it('Verify that home page is visible successfully', () => {
+            cy.homePgVisible();
+
+        });
+        it.only('Place Order: Register while Checkout', () => {
+            cy.get('.features_items .col-sm-4')
+            .first()
+            .trigger('mouseover')
+            .find('a')
+            .contains('Add to cart')
+            .click();
+            cy.contains('View Cart').click();
+            cy.url().should('eq', 'https://automationexercise.com/view_cart');
+            cy.contains('Proceed To Checkout').click();
+            cy.contains('Continue On Cart').click();
+            cy.regUser(userData);
+            cy.contains(`Logged in as ${userData.name}`).should('be.visible');
+            cy.contains('Cart').click();
+            cy.contains('Proceed To Checkout').click();
+            cy.contains('Your billing address').should('be.visible');
+            cy.contains('Your delivery address').should('be.visible');
+            cy.get('textarea[name="message"]').type('Please deliver between 9 AM to 5 PM');;
+            cy.contains('Place Order').click();
+            cy.get('input[name="name_on_card"]').type(userData.name);
+            cy.get('input[name="card_number"]').type('1234567890123456');
+            cy.get('input[name="cvc"]').type('123');
+            cy.get('input[name="expiry_month"]').type('12');
+            cy.get('input[name="expiry_year"]').type('2023');
+            cy.contains('Pay and Confirm Order').click();
+            cy.contains('Order Placed!').should('exist')
+            .and('be.visible');
+            cy.contains('Delete Account').click();
+            cy.contains('Account Deleted!').should('be.visible');
+            cy.contains('Continue').click();
+           
+        });
+
+
+
+    })
 
 });

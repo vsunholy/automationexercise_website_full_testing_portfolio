@@ -43,6 +43,7 @@
 // })
 
 Cypress.Commands.add('regUser',(userData) => {
+    // cy.session('reg', () => {
     cy.contains('Signup / Login').click();
   
       
@@ -76,7 +77,7 @@ Cypress.Commands.add('regUser',(userData) => {
     cy.contains('Continue').click();
 
     // Verify logged in and then delete the account
-    
+    // });  
 })
   Cypress.Commands.add('deleteUser', (userData) => {
     cy.contains(`Logged in as ${userData.name}`).should('be.visible');
