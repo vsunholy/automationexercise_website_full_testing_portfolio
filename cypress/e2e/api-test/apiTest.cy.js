@@ -483,7 +483,7 @@ describe('API 13: PUT METHOD To Update User Account', () => {
     });
 });
 describe('API 14: GET user account detail by email', () => {
-    it.only('API 14: GET user account detail by email', () => {
+    it('API 14: GET user account detail by email', () => {
         const user = {
             email: 'bebruni30001@gmail.com' // Customized email
         };

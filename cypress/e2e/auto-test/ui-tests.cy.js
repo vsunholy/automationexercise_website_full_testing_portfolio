@@ -469,7 +469,7 @@ describe('Automation Exercise - UI Tests', () => {
         });
 
 
-        it.only('Search Products and Verify Cart After Login', () => {
+        it('Search Products and Verify Cart After Login', () => {
             cy.visit('http://automationexercise.com');
             cy.get('a[href="/products"]').click();
             cy.url().should('include', '/products');
