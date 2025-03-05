@@ -242,42 +242,7 @@ describe('API 6: POST To Search Product without search_product parameter', () =>
 
 });
 
-describe('API 7: POST To Verify Login with valid details', () => {
-    it('validates POST request behavior', () => {
 
-        const loginData = {
-            email: 'bebras228@gmail.com',
-            password: '12345'
-
-        };
-        cy.request({
-            method: 'POST',
-            url: `${baseUrl}/verifyLogin`,
-            body: loginData,
-            form: true,
-            failOnStatusCode: false
-        }).then((response) => {
-
-
-            let respData;
-            try {
-                respData = typeof response.body === 'string'
-                    ? JSON.parse(response.body)
-                    : response.body;
-            } catch (error) {
-                throw new Error('Failed to parse JSON response: ' + error.message);
-            }
-
-            expect(response.status).to.equal(200);
-
-
-            expect(respData.responseCode).to.be.a('number').and.equal(200);
-
-            expect(respData.message).to.be.a('string').and.equal('User exists!');
-        });
-
-    });
-});
 
 describe('API 8: POST To Verify Login without email parameter', () => {
     it('validates POST request behavior  without email parameter', () => {
@@ -433,7 +398,42 @@ describe('API 11: POST To Create/Register User Account', () => {
     });
 });
 
+describe('API 7: POST To Verify Login with valid details', () => {
+    it('validates POST request behavior', () => {
 
+        const loginData = {
+            email: 'bebruni30001@gmail.com',
+            password: '12345'
+
+        };
+        cy.request({
+            method: 'POST',
+            url: `${baseUrl}/verifyLogin`,
+            body: loginData,
+            form: true,
+            failOnStatusCode: false
+        }).then((response) => {
+
+
+            let respData;
+            try {
+                respData = typeof response.body === 'string'
+                    ? JSON.parse(response.body)
+                    : response.body;
+            } catch (error) {
+                throw new Error('Failed to parse JSON response: ' + error.message);
+            }
+
+            expect(response.status).to.equal(200);
+
+
+            expect(respData.responseCode).to.be.a('number').and.equal(200);
+
+            expect(respData.message).to.be.a('string').and.equal('User exists!');
+        });
+
+    });
+});
 describe('API 13: PUT METHOD To Update User Account', () => {
     it('validates PUT request behavior', () => {
         const userData = {
