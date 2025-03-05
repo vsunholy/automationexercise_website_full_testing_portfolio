@@ -271,7 +271,7 @@ describe('Automation Exercise - UI Tests', () => {
 
     })
     context('Test Case 14', () => {
-        beforeEach(() => {
+       before(() => {
             cy.visit('http://automationexercise.com');
             cy.login(userData);
             cy.fastDelete();
