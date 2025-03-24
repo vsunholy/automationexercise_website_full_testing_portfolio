@@ -28,7 +28,6 @@ describe('Automation Exercise - UI Tests', () => {
         it('Test Case 2: Login with Re-Created Account', () => {
             cy.visit('http://automationexercise.com');
             cy.contains('Signup / Login').click();
-
             cy.contains('Login to your account').should('be.visible');
             cy.get('input[data-qa="login-email"]').type(userData.email);
             cy.get('input[data-qa="login-password"]').type(userData.password);
@@ -214,7 +213,6 @@ describe('Automation Exercise - UI Tests', () => {
 
 
         })
-
 
     })
     context('Test Case 12', () => {

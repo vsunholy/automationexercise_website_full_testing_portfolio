@@ -460,7 +460,7 @@ describe('API 13: PUT METHOD To Update User Account', () => {
             method: 'PUT',
             url: 'https://automationexercise.com/api/updateAccount',
             body: userData,
-            form: true, 
+            form: true,
             failOnStatusCode: false,
         }).then((response) => {
             cy.log('Response Status:', response.status);
@@ -487,7 +487,7 @@ describe('API 14: GET user account detail by email', () => {
         const user = {
             email: 'bebruni30001@gmail.com' // Customized email
         };
-    
+
         cy.request({
             method: 'GET',
             url: 'https://automationexercise.com/api/getUserDetailByEmail',
@@ -497,7 +497,7 @@ describe('API 14: GET user account detail by email', () => {
                 expect(response.status).to.eq(200);
                 let data = JSON.parse(response.body);
                 expect(data.responseCode).to.eq(200);
-    
+
                 expect(data).to.have.property('user').and.not.empty;
                 expect(data.user).to.be.an('object').and.not.empty;
                 expect(data.user).to.have.property('id');
@@ -516,7 +516,7 @@ describe('API 14: GET user account detail by email', () => {
                 expect(data.user).to.have.property('state');
                 expect(data.user).to.have.property('city');
                 expect(data.user).to.have.property('zipcode');
-    
+
             });
     });
 });
