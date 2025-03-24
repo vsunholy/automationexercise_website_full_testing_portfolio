@@ -69,7 +69,6 @@ describe('Automation Exercise - UI Tests', () => {
             cy.get('input[data-qa="login-email"]').type(userData.email);
             cy.get('input[data-qa="login-password"]').type(userData.password);
             cy.get('button[data-qa="login-button"]').click();
-
             cy.contains(`Logged in as ${userData.name}`).should('be.visible');
             cy.contains('Logout').click();
             cy.url().should('include', '/login');
@@ -149,15 +148,10 @@ describe('Automation Exercise - UI Tests', () => {
             cy.get('.product-information').should('be.visible').within(() => {
 
                 cy.get('h2').should('be.visible');
-
                 cy.contains('Category').should('be.visible');
-
                 cy.contains('Rs. 500').should('be.visible');
-
                 cy.contains('Availability').should('be.visible');
-
                 cy.contains('Condition').should('be.visible');
-
                 cy.contains('Brand').should('be.visible');
             });
         })
